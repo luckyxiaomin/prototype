@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;
+            padding:0;
+            border:0;
+        }
+
+        #box{
+            width:200px;
+            height:200px;
+            position:absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #box img{float:left;
+        width:200px;
+        height: 200px;}
+
+        #contain{
+            position:relative;
+            left: 200px;
+            top:100px;
+            width:800px;
+            height: 200px;
+            overflow: hidden;
+
+        }
+    </style>
+    <script src="js/scroll.js"></script>
+    <script>
+        window.onload=function(){
+            var box=document.getElementById("box");
+            var target=new SlideLoopImage(["images/12.jpg","images/25.jpg","images/26.jpg","images/27.jpg","images/1.jpg"],box);
+            target.createImg();
+        };
+    </script>
+</head>
+<body>
+<div id="contain">
+    <div id="box"></div>
+</div>
+</body>
+</html>

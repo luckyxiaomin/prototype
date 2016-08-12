@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;
+            padding:0;
+            border:0;
+        }
+
+        #box{
+            width:500px;
+            height:300px;
+            position:absolute;
+            left: 150px;
+            top: 0;
+        }
+
+        #box img{float:left;
+            width:500px;
+            height:300px;}
+
+        #contain{
+            position:relative;
+            top:100px;
+            left: 300px;
+            background:pink;
+            width:800px;
+            height: 300px;
+            overflow: hidden;
+        }
+        #left{width:150px;
+        height: 300px;
+        position: absolute;
+        left: 0;
+        top:0;
+        background: #000;
+        opacity: 0.8;
+        z-index: 3;}
+
+        #right{width:150px;
+        height: 300px;
+        position: absolute;
+        right: 0;
+        top:0;
+         background: #000;
+         opacity: 0.8;
+            z-index: 3;
+        }
+    </style>
+    <script src="js/sport.js"></script>
+    <script>
+        window.onload=function(){
+
+            var box=document.getElementById("box");
+            var target=new SlideLoopImage(["images/15.jpg","images/25.jpg","images/26.jpg","images/27.jpg","images/21.jpg"],box,500,150);
+
+            target.createImg();
+        };
+
+        var LoopImages=function(imgArr,container,width,left1)
+        {
+            this.imagesArr=imgArr;
+            this.container=container;
+            this.width=width;
+            this.left=left1;
+        };
+
+        LoopImages.prototype={
+            createImg:function()
+            {
+                var that=this;
+                for(var i=0;i<that.imagesArr.length;i++)
+                {
+                    that.container.innerHTML+="<img src="+that.imagesArr[i]+">";
+                }
+
+                that.container.style.width=that.width*(that.imagesArr.length)+"px";
+
+                var timer=null;
+                var count=1;
+                var m=that.imagesArr.length-1;
+
+                    timer=setInterval(function(){
+
+
+                        if(count<that.imagesArr.length)
+                        {
+
+                            sport(that.container,'left',-(count++)*that.width+that.left);
+
+                        }
+                        else if(m>0)
+                        {
+                            m--;
+                            sport(that.container,'left',(-m*that.width+that.left));
+
+                        }
+                        else
+                        {
+                            m=that.imagesArr.length-1;
+                            count=1;
+
+                        }
+
+                    },3000);
+
+
+
+                return "createImg";
+            }
+        };
+
+        var SlideLoopImage=function(imgArr,container,width,left1)
+        {
+            LoopImages.call(this,imgArr,container,width,left1);
+        };
+        SlideLoopImage.prototype=new LoopImages(
+        );
+        SlideLoopImage.prototype.changeImg=function()
+        {
+            return "slide image";
+        };
+    </script>
+</head>
+<body>
+<div id="contain">
+    <div id="left"></div>
+    <div id="box">
+
+    </div>
+    <div id="right"></div>
+</div>
+</body>
+</html>
